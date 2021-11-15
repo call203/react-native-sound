@@ -146,6 +146,19 @@ RCT_EXPORT_METHOD(setMode : (NSString *)modeName) {
     }
 }
 
+
+
+RCT_EXPORT_METHOD(setMixAudio:(BOOL) on) {
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+
+    if (on) {
+        [session setCategory: AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
+    } else {
+        [session setCategory: AVAudioSessionCategoryPlayback withOptions:0 error:nil];
+    }
+    [session setActive:true error:nil];
+}
+
 RCT_EXPORT_METHOD(setCategory
                   : (NSString *)categoryName mixWithOthers
                   : (BOOL)mixWithOthers) {
